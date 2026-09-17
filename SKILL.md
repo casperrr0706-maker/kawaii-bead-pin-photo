@@ -13,14 +13,25 @@ If the user provides a finished style sample they like, store/keep it as the app
 
 ## Pipeline (mandatory)
 
-The processing logic is fixed:
+The processing logic is fixed. Follow exactly this order, one pass each:
 
-1. **Mosaic pass (approved parameters)** — run the reference image through `prepare_bead_pattern.py` to produce the mosaic (pixel plate) and bead-pattern plate, using the approved pre-processing spec (see "Fixed Bead-Grid Spec"): contain mode, light background, 22–28 grid, 10–12 colors.
-2. **Mosaic validation** — inspect the generated pixel plate / bead pattern and judge ONLY whether the subject shape is recognizable at mosaic resolution (silhouette + major color blocks). This is the single and final validation point for the subject.
-3. **If inaccurate** — adjust only by cropping the subject to enlarge it (or rerunning contain), then rerun at the same locked grid/colors. Do NOT raise the grid or color count beyond the spec (22–28 / 10–12). If the mosaic still reads abstract, accept it and proceed.
-4. **Bead generation** — once the mosaic passes validation, generate the final photo from the mosaic. From this point the original photo is NO LONGER used for validation; the mosaic is the only source of truth for subject shape.
+1. **Pre-clean (only if needed)** — (a) if the photo contains readable text / numbers / watermarks (e.g. "25", "イルカ"), remove them first with inpainting/cleanup; (b) if a noisy background (e.g. stripes) distracts from the subject, crop the subject larger. Both are optional and skipped when not needed.
+2. **Mosaic pass (approved parameters)** — run the reference image through `prepare_bead_pattern.py` to produce the mosaic (pixel plate) and bead-pattern plate, using the approved pre-processing spec (see "Fixed Bead-Grid Spec"): contain mode, light background, 22–28 grid, 10–12 colors. Run it ONCE with the fixed parameters; do not tune parameters for detail.
+3. **Mosaic validation (single, final)** — inspect the generated bead pattern and judge ONLY whether the subject silhouette and major color blocks are readable at mosaic resolution. This is the one and only subject check. **If it reads abstract, accept it and proceed** — abstract is fine, the mosaic is still the structural anchor. Only if the subject is unrecognizably wrong may you crop the subject larger and rerun once at the SAME locked grid/colors (never raise them).
+4. **Bead generation (one shot)** — generate the final photo from the mosaic. The mosaic is the ONLY source of truth for subject shape; the original photo is no longer used. Generate once. Only regenerate when the subject was misread as a different subject (e.g. cake → dog/character) or the hardware structure (pin / per-column rings) is wholly missing.
 
-Do not re-validate against the original photo during or after bead generation, and do not keep regenerating because a read-back description differs in minor ways. When the overall kawaii mood, hardware structure, and subject readability are achieved, deliver.
+Do not re-validate against the original photo, do not re-roll the mosaic for detail, and do not keep regenerating because a read-back description differs in minor ways. When the kawaii mood, hardware structure, and subject readability are achieved, deliver.
+
+## Progress Display (user-facing steps)
+
+Before each pipeline step, announce it to the user with a short, clean label so the progress in Doubao reads as a tidy fixed sequence — never a wall of tool calls, never repeated steps:
+
+1. `清洗照片（如有文字/背景干扰）` — only when pre-clean is actually needed; otherwise skip the label entirely.
+2. `生成马赛克（固定参数 22–28 网格 / 10–12 色）`
+3. `校验马赛克轮廓（抽象也直接采用）`
+4. `生成闪钻拼贴别针成片`
+
+Never show more than one label per step, never re-announce a step that already ran, and never announce retries (a rare single retry needs no extra label — just reuse the same step label). After the final image is produced, one short confirmation line is enough: `成片完成，已按锁定规格生成`.
 
 ## Fixed Bead-Grid Spec (mandatory)
 
@@ -54,6 +65,16 @@ Read [references/style-guide.md](references/style-guide.md) before producing or 
 - **Pin decoration (no bead strings on the pin)**: the pin itself carries NO string of beads. It may carry one small themed ornament whose subject is drawn from the main subject — e.g. for a horse subject, a tiny plastic horse bead or horse-shaped charm on the pin bar; for a dolphin, a small dolphin/drop. The ornament uses subject colors.
 - **Charms and background (free variation)**: charms, pin decoration, and background may vary creatively around the subject as long as the overall mood matches — dreamy kawaii summer / beach vibe. They are not locked to any fixed set of elements. Preferred directions: one larger themed charm near the right end of the pin, small accents (stars, drops, pearls, bows), one filigree or bead tassel; soft-focus tropical beach background (blue sky, sand, flowers, palm leaves, bokeh, optional cute toy silhouette). All accent colors drawn from the subject palette.
 - Square, centered, bright, cute, polished composition. No readable text or watermark.
+
+## No Redundant Actions (never do these)
+
+These branches add no value to the final output and must not be taken:
+
+- Do NOT re-run the mosaic multiple times to chase detail (no grid/color tuning, no iterative re-rolls; one fixed-parameter pass, at most one crop-and-rerun).
+- Do NOT raise grid above 28 or colors above 12, ever.
+- Do NOT re-validate the final image against the original photo after the mosaic passed.
+- Do NOT regenerate the final image repeatedly for minor read-back differences; only a subject misread or wholly missing hardware structure justifies one regeneration.
+- Do NOT expand the subject area / grid just because the mosaic looks abstract — abstract is accepted.
 
 ## Quality Gate
 
