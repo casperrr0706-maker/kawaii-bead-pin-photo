@@ -76,6 +76,7 @@ The result should feel like a collectible handmade accessory photographed in a d
 
 - The mood, hardware structure, subject readability, square bead shape, and preserved panel base color are the acceptance criteria, not pixel-perfect read-back descriptions.
 - Do not keep regenerating because a read-back description differs in minor ways; when the overall kawaii mood + structure + readability are achieved, deliver.
+- **Pixel-art / flat-block failure diagnosis**: if the final image reads as flat pixel squares / plain matte blocks with no sparkle, the texture anchor (`shiny-sample.png`) was not passed or the sparkle wording was dropped — re-run with BOTH references (`bead_pattern.png` + `shiny-sample.png`) and the full prompt additions below. Never deliver a pixel-art-looking final image.
 
 ## Suggested Image Prompt Additions
 
