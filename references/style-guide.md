@@ -42,7 +42,7 @@ The result should feel like a collectible handmade accessory photographed in a d
 ## Bead Panel
 
 - Hanging grid follows the approved pre-processing: 22–28 columns square grid (dolphin = 28), 10–12 colors, contain fit with background fill sampled from the photo's own background; **the panel reproduces the FULL image colors — subject plus its background color as base/frame**.
-- **Beads are SQUARE CUT RHINESTONE-STUDDED, STRONG SPARKLE (final output standard, user-approved)**: every bead is a **square** rhinestone/crystal stud — square-cut flat crystal tiles in a regular square grid, like square mosaic tiles. NEVER round, oval, or hexagonal beads. Each bead: bright mirror highlight AND facet-like star glints, saturated luminous color, whole panel glitters like a diamond-studded mosaic, brighter and more luminous. **Bead size / count / grid placement MUST match `shiny-sample.png` exactly** (same rows & columns, same bead proportions, same panel position) — the anchor is the user-approved abstract pastel color-block square-stud sample (pink/blue/white/lavender/mint abstract blocks, no concrete subject, no animal, no face, no black eyes), so it locks texture, shape, and grid spec WITHOUT any subject contamination; all subject color comes only from the user's photo mosaic. Reference: `shiny-sample.png` and `approved-sample.png`.
+- **Beads are SQUARE CUT RHINESTONE-STUDDED, STRONG SPARKLE, DISTINCT (final output standard, user-approved)**: every bead is a **square** rhinestone/crystal stud — square-cut flat crystal tiles in a regular square grid, like square mosaic tiles. NEVER round, oval, or hexagonal beads. **Every bead is clearly SEPARATED from its neighbors with visible small gaps/grout lines between them, like individual rhinestones pasted on a base with backing visible between beads — NEVER fused into a continuous sheet, NEVER a seamless glued-tile surface.** Each bead: bright mirror highlight AND facet-like star glints, saturated luminous color, whole panel glitters like a diamond-studded mosaic, brighter and more luminous. **Bead size / count / grid placement MUST match `shiny-sample.png` exactly** (same rows & columns, same bead proportions, same panel position) — the anchor is the user-approved abstract pastel color-block square-stud sample (pink/blue/white/lavender/mint abstract blocks, no concrete subject, no animal, no face, no black eyes), so it locks texture, shape, and grid spec WITHOUT any subject contamination; all subject color comes only from the user's photo mosaic. Reference: `shiny-sample.png` and `approved-sample.png`.
 - Shine is bead-surface glitter on a completely flat panel; never 3D relief, never raised subject.
 - Rows and columns regular with slight natural sag.
 - The photo's background color stays as the panel base/frame (pink fabric → pink base; sky → blue frame).
@@ -83,7 +83,7 @@ The result should feel like a collectible handmade accessory photographed in a d
 - "[one sentence describing the mosaic subject from its color blocks — e.g. white round kitty face, two ears, strawberries on top, black dot eyes, yellow nose, whiskers, pink background — strictly reproduce this subject's color blocks from the mosaic plate, no added details]"
 - "faithfully reproduce the mosaic pixel plate — full image colors including its background, no added details"
 - "FLAT mosaic like pixel art, nothing protrudes, subject exists only as colored beads on one flat surface"
-- "SQUARE rhinestone-studded mosaic: every bead a square-cut crystal stud (NOT round/oval/hexagonal), bright mirror highlight AND facet-like star glints, diamond-studded glitter look, brighter and more luminous, bead grid size/count/placement matching the style reference"
+- "SQUARE rhinestone-studded mosaic: every bead a square-cut crystal stud (NOT round/oval/hexagonal), every bead a DISTINCT separate stud with visible small gaps between beads — never fused into a continuous sheet, never seamless glued tiles — bright mirror highlight AND facet-like star glints, diamond-studded glitter look, brighter and more luminous, bead grid size/count/placement matching the style reference"
 - "panel base/frame color kept from the mosaic background, never washed out to all-white"
 - "silver safety pin hardware, one independent jump ring per column"
 - "no bead strings on the pin, only one small themed ornament extracted from the CURRENT subject in subject colors; no transparent ball with an animal, no carried-over subject from the reference"
@@ -95,6 +95,7 @@ Negative constraints:
 - "no printed poster, no flat pixel art, no embroidery, no fabric panel"
 - "no beads forming eyes/flowers/details absent from the mosaic"
 - "no round/oval/hexagonal beads, panel washed out to all-white"
+- "no fused beads (beads merged into one continuous sheet or seamless tile surface — every bead must stay distinct with visible gaps)"
 - "no bead strings on the pin, no single-point or two-corner hanging, no shared-chain hanging, no missing per-column rings"
 - "no transparent ball with an animal on the pin, no carried-over subject from the reference"
 - "no watermark, no logo, no readable typography"
