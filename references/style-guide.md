@@ -4,7 +4,8 @@ This reference defines the target look for the bead safety-pin photo workflow. T
 
 ## Fixed Bead-Grid Spec (approved pre-processing parameters)
 
-- Mosaic pre-processing: **contain** mode (never crop the subject), light background fill (e.g. `#DDF8FF`), grid **22–28** (simple → 22, detailed → 28; dolphin = 28), colors **10–12** (Median Cut quantization).
+- Mosaic pre-processing: **contain** mode (keep the WHOLE image — subject AND its background; never crop the subject away), background fill sampled from the photo's own background color (fallback `#DDF8FF`), grid **22–28** (simple → 22, detailed → 28; dolphin = 28), colors **10–12** (Median Cut quantization).
+- **Full-image color fidelity (user-confirmed)**: the mosaic reproduces the ENTIRE picture's colors — the subject and its background colors stay (pink fabric background → pink base in the panel). The panel keeps that background color as its base/frame.
 - 28×28 keeps the dolphin's big silhouette (curved body, dorsal fin, tail, belly white) and the high-contrast dark eye; 12 colors merge blue-white gradients into clean bead blocks.
 - **Grid 22–28 / colors 10–12 are HARD-LOCKED** (user-confirmed). Never raise grid or colors to chase detail; abstract mosaics are accepted and used as the anchor as-is.
 - The pattern plate is the ONLY structural anchor; the image model must not re-interpret the original photo's structure.
@@ -33,14 +34,15 @@ The result should feel like a collectible handmade accessory photographed in a p
 
 ## Flat-Mosaic Principle (mandatory)
 
-- The panel is a **completely flat** regular bead grid; the subject appears ONLY through bead colors, like pixel art. All beads on one plane.
+- The panel is a **completely flat** regular bead grid; the subject AND its background colors appear ONLY through bead colors, like pixel art. All beads on one plane.
 - NEVER sculpt a 3D/raised subject on top of the beads (no volumetric character/pet/doll, no relief, no embossed figure, no depth illusion inside the panel).
+- **Anti-3D enforcement (user-confirmed)**: the model re-inflates real-world entities (plush, cakes, toys) into volume despite the flat mosaic — so LEAD every prompt with a strong flat declaration before the subject, and ban volumetric materials ("no plush, no cloth, no felt, no stuffing, no toy/doll/cake-model on the panel, no shadows under the subject"). If a volumetric toy appears on/above the panel, FAIL and regenerate once with the strong declaration.
 - Reference files: `flat-style-A.png` ~ `flat-style-D.png` show the approved flat look.
-- Prompt additions: "flat mosaic, colors only, all beads on one plane, no 3D relief, no raised pattern, no volumetric figure".
+- Prompt additions: "flat mosaic, colors only, all beads on one plane, no 3D relief, no raised pattern, no volumetric figure, no plush, no doll, no cake model on the panel".
 
 ## Bead Panel
 
-- Hanging grid follows the approved pre-processing: 22–28 columns square grid (dolphin = 28), 10–12 colors, contain fit with light background fill.
+- Hanging grid follows the approved pre-processing: 22–28 columns square grid (dolphin = 28), 10–12 colors, contain fit with background fill sampled from the photo's own background; **the panel reproduces the FULL image colors — subject plus its background color as base/frame**.
 - **Beads are RHINESTONE-STUDDED, SQUARE CUT (final output standard, user-approved)**: every bead is a SQUARE rhinestone/crystal stud; the whole panel glitters like a diamond-studded mosaic. Each bead: bright mirror highlight, facet-like sparkle glints, saturated luminous color. **Bead size / count / grid placement must match `shiny-sample.png` exactly** (same rows & columns, same bead proportions, same panel position — the anchor now is the user-approved abstract color-block sample with square studs and NO subject, so it also locks the grid spec without contaminating the new subject). Reference: `shiny-sample.png` and `approved-sample.png`.
 - Shine is bead-surface glitter on a completely flat panel; never 3D relief, never raised subject.
 - Rows and columns regular with slight natural sag.
@@ -79,7 +81,9 @@ The result should feel like a collectible handmade accessory photographed in a p
 ## Suggested Image Prompt Additions
 
 - "macro product photography, handmade kawaii craft accessory"
-- "faithfully reproduce the mosaic pixel plate, no added details"
+- "faithfully reproduce the mosaic pixel plate — full image colors including its background, no added details"
+- "FLAT mosaic like pixel art, nothing protrudes, subject exists only as colored beads on one flat surface"
+- "no plush, no cloth, no felt, no stuffing, no doll, no toy or cake model on the panel, no shadows under the subject"
 - "shiny rhinestone-studded mosaic, SQUARE-cut crystal studs, bright mirror highlight per bead, facet-like glints, diamond-studded glitter look, bead grid size/count/placement matching the style reference"
 - "silver safety pin hardware, one independent jump ring per column"
 - "no bead strings on the pin, only one small themed ornament in subject colors"

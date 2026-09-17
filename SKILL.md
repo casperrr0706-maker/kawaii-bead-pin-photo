@@ -41,7 +41,8 @@ Never show more than one label per step, never re-announce a step that already r
 ## Fixed Bead-Grid Spec (mandatory)
 
 - Mosaic pre-processing follows the approved parameters (user-confirmed):
-  - **contain** fit mode by default — keep the whole subject, never crop edges; fill empty area with a light background (e.g. `#DDF8FF`).
+  - **contain** fit mode by default — keep the WHOLE image, never crop the subject away from its background; fill empty area with a background color sampled from the photo's own background (fallback `#DDF8FF`).
+  - **Full-image color fidelity (user-confirmed)**: the mosaic must faithfully reproduce the ENTIRE picture's colors and shape — the subject AND its background colors (e.g. pink fabric background stays pink in the panel). Never strip the background to "extract the subject only". The panel later keeps this background color as its base/frame.
   - Grid **22×22–28×28**: simple subjects use 22, detailed subjects use 28 (the dolphin uses 28).
   - Colors **10–12** (Median Cut / palette quantization) — merges gradients into clean bead color blocks while keeping big color blocks.
   - A 28×28 grid naturally preserves the dolphin's big silhouette: curved body, dorsal fin, tail, belly white area; the dark eye survives as a high-contrast small block.
@@ -60,11 +61,21 @@ Never show more than one label per step, never re-announce a step that already r
 - If the panel subject reads like a toy/character with volume (wings, skirts, limbs that pop out of the grid), it is wrong. The shape must read through color blocks inside the flat grid, exactly like the reference files `references/flat-style-A~D.png`.
 - Add to every prompt: "flat mosaic, colors only, all beads on one plane, no 3D relief, no raised pattern, no volumetric figure."
 
+## Anti-Volumetric Enforcement (why flat fails, and the fix — user-confirmed)
+
+**Why 3D still appears after the mosaic pass**: the image model has a strong volumetric prior for real-world entities (plush bears, cakes, toys, characters). Even when the mosaic reference is perfectly flat, the model tends to "re-inflate" the subject into a physical toy / plush / doll standing on the panel — text saying "flat" is usually weaker than that visual prior.
+
+**Mandatory countermeasures (apply every generation):**
+1. Lead the prompt with a STRONG flat declaration BEFORE describing the subject: "This is a FLAT bead mosaic — like pixel art. NOTHING protrudes. The [subject] does NOT exist as a real toy; it exists ONLY as colored beads on one flat surface."
+2. Explicitly ban volumetric materials and cues: "no plush fabric, no cloth, no felt, no stuffing, no toy on the panel, no doll, no cake model sitting on the panel, no shadows under the subject, no depth, no relief."
+3. Post-generation check (Quality Gate): if ANY toy/doll/plush/cake-model with volume appears ON or ABOVE the panel — even a cute one — the output is FAILED and regenerated once with the strong declaration.
+4. The bead panel's colors must also keep the photo's background color as base/frame (full-image fidelity), so the model has the whole flat picture to reproduce, not a cropped subject that invites volume.
+
 ## Final Image Requirements
 
 Read [references/style-guide.md](references/style-guide.md) before producing or revising a final image.
 
-- **Subject fidelity to mosaic**: the bead panel reproduces the mosaic — same simplified color blocks, same silhouette — as a **flat** bead grid where the pattern appears only through bead colors. No 3D relief, no raised subject on the beads. A mosaic-level border/frame color from the photo background (e.g. cyan/blue for sea or sky) may frame the panel.
+- **Subject fidelity to mosaic — FULL IMAGE (user-confirmed)**: the bead panel reproduces the whole mosaic — the subject AND its background colors, same simplified color blocks, same silhouette — as a **flat** bead grid where the pattern appears only through bead colors. The photo's background color is kept as the panel's base/frame (e.g. pink fabric → pink-beige panel base; sky → blue frame). No 3D relief, no raised subject on the beads.
 - **Bead texture — RHINESTONE-STUDDED MOSAIC, SQUARE CUT (final output standard, user-approved)**: every bead in the panel is a **square** rhinestone / crystal stud — square-cut flat crystal tiles in a regular grid, like square mosaic tiles with small gaps. Each bead has a bright mirror highlight and sparkling facet-like glints; colors are saturated and luminous. **Bead size, count, and grid placement MUST match `references/shiny-sample.png` exactly** (same number of rows/columns, same bead proportions, same panel position) — the anchor fixes the grid spec so the model cannot invent a different bead density or shape. This is the FIXED final texture for every output. Reference: `references/shiny-sample.png` (user-approved abstract color-block sample: square studs, fixed grid, no subject) and `references/approved-sample.png`. The panel stays completely flat; shine is bead-surface glitter, never 3D relief. Aligned rows/columns with slight natural sag.
 - **Hardware**: a silver metal safety pin spans the top. **Per-column hooks (mandatory)**: EVERY column of the bead panel has its own small metal jump ring or hook hooked onto the pin — one independent ring per column, a full row of rings, small gaps between them. Never two-corner attachments, never a shared chain.
 - **Pin decoration (no bead strings on the pin)**: the pin itself carries NO string of beads. It carries exactly ONE small themed ornament **extracted from the main subject** — e.g. for a horse subject, a tiny plastic horse bead / horse-shaped charm on the pin bar; for a dolphin, a small dolphin/drop; for a cake, a mini cake bead. The ornament is a single item, uses subject colors, and never becomes a bead string or a row of decorations.
@@ -85,7 +96,7 @@ These branches add no value to the final output and must not be taken:
 
 Before delivering, check that:
 
-- The bead panel echoes the mosaic (color blocks + silhouette) as a flat color-only grid, without invented fine details or letters/numbers, and without any 3D relief / raised / volumetric subject on the beads.
+- The bead panel echoes the mosaic (color blocks + silhouette, INCLUDING the photo's background color as base/frame) as a flat color-only grid, without invented fine details or letters/numbers, and without any 3D relief / raised / volumetric subject on the beads. If any toy/plush/doll/cake-model with volume appears on or above the panel, FAIL and regenerate once with the strong flat declaration.
 - Beads form aligned rows/columns; **square rhinestone-studded mosaic texture** — every bead is a square sparkling crystal stud with bright mirror highlights, matching the reference grid size/count/placement (see `references/shiny-sample.png`).
 - Every column has its own visible hook/ring on the pin (scan top row; regenerate only if the whole structure is missing).
 - The pin has NO bead string on it; only one small themed ornament in subject colors.
@@ -100,7 +111,9 @@ Use the structure below as a starting point, adapt to the subject, and keep the 
 ```text
 Create a square kawaii product photo of a handmade bead mosaic charm hanging from a shiny silver safety pin. Match the sparkling square-cut rhinestone-studded bead texture AND the bead grid size/count/placement of the provided style reference (NOT plain matte beads, NOT a different bead shape or density).
 
-The bead panel is a COMPLETELY FLAT regular grid of SQUARE RHINESTONE-STUDDED beads that faithfully reproduces the provided mosaic/pixel plate: same simplified color blocks, same silhouette, nothing more. The pattern appears ONLY through the color of each bead, like a pixel-art mosaic; every bead is on one plane. NO 3D relief, no raised figure, no volumetric character or pet built on top of the beads. Do NOT draw eyes, flowers, or any fine detail on the beads; no letters or numbers anywhere. A mosaic-level border color from the photo background (e.g. cyan/blue) may frame the panel. Every bead is a square-cut rhinestone/crystal stud with a bright mirror highlight and facet-like glints, like a diamond-studded mosaic catching light; beads match the reference grid's size, count and placement; aligned rows and columns with slight natural sag.
+IMPORTANT FLAT RULE — read first: This is a FLAT bead mosaic, like pixel art. NOTHING protrudes. The subject does NOT exist as a real toy or object; it exists ONLY as colored beads on one flat surface. No plush fabric, no cloth, no felt, no stuffing, no doll, no toy standing on the panel, no cake model on the panel, no shadows under the subject, no depth, no relief, no raised pattern.
+
+The bead panel is a COMPLETELY FLAT regular grid of SQUARE RHINESTONE-STUDDED beads that faithfully reproduces the provided mosaic/pixel plate — the FULL image including its background colors: same simplified color blocks, same silhouette, same background color as the panel base/frame, nothing more. The pattern appears ONLY through the color of each bead, like a pixel-art mosaic; every bead is on one plane. NO 3D relief, no raised figure, no volumetric character or pet built on top of the beads. Do NOT draw eyes, flowers, or any fine detail on the beads; no letters or numbers anywhere. Every bead is a square-cut rhinestone/crystal stud with a bright mirror highlight and facet-like glints, like a diamond-studded mosaic catching light; beads match the reference grid's size, count and placement; aligned rows and columns with slight natural sag.
 
 Hardware (strict): EVERY column of the bead panel hangs on its own small metal jump ring or hook hooked onto the safety pin — one independent ring per column, a full visible row of rings along the pin with small gaps. Never two-corner hanging, never a shared chain. The pin itself carries NO string of beads; it carries only one small themed ornament based on the subject (e.g. a tiny [subject] bead or charm) in subject colors.
 
