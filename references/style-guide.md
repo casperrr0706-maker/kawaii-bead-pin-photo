@@ -6,6 +6,7 @@ This reference defines the target look for the bead safety-pin photo workflow. T
 
 - Mosaic pre-processing: **contain** mode (never crop the subject), light background fill (e.g. `#DDF8FF`), grid **22–28** (simple → 22, detailed → 28; dolphin = 28), colors **10–12** (Median Cut quantization).
 - 28×28 keeps the dolphin's big silhouette (curved body, dorsal fin, tail, belly white) and the high-contrast dark eye; 12 colors merge blue-white gradients into clean bead blocks.
+- **Grid 22–28 / colors 10–12 are HARD-LOCKED** (user-confirmed). Never raise grid or colors to chase detail; abstract mosaics are accepted and used as the anchor as-is.
 - The pattern plate is the ONLY structural anchor; the image model must not re-interpret the original photo's structure.
 
 ## Pipeline
@@ -40,8 +41,8 @@ The result should feel like a collectible handmade accessory photographed in a p
 ## Bead Panel
 
 - Hanging grid follows the approved pre-processing: 22–28 columns square grid (dolphin = 28), 10–12 colors, contain fit with light background fill.
-- Beads are short cylindrical tubes or rounded squares, glossy, translucent or milky plastic, subtle gradient transitions.
-- Each bead: small top highlight, soft lower shadow.
+- **Beads are RHINESTONE-STUDDED (final output standard, user-approved)**: every bead is a tiny sparkling rhinestone/crystal stud; the whole panel glitters like a diamond-studded mosaic. Each bead: bright mirror highlight, facet-like sparkle glints, saturated luminous color. Reference: `shiny-sample.png` (user-approved sparkling dolphin) and `approved-sample.png`.
+- Shine is bead-surface glitter on a completely flat panel; never 3D relief, never raised subject.
 - Rows and columns regular with slight natural sag.
 - Optional framing border color derived from the photo background (sea/sky → cyan/blue) as a mosaic-level block.
 
@@ -80,7 +81,7 @@ The result should feel like a collectible handmade accessory photographed in a p
 
 - "macro product photography, handmade kawaii craft accessory"
 - "faithfully reproduce the mosaic pixel plate, no added details"
-- "glossy translucent bead tubes, rounded-square bead grid, subtle color gradients"
+- "shiny rhinestone-studded mosaic, every bead a sparkling crystal stud, bright mirror highlight per bead, facet-like glints, diamond-studded glitter look"
 - "silver safety pin hardware, one independent jump ring per column"
 - "no bead strings on the pin, only one small themed ornament in subject colors"
 - "freely vary charms and background around the subject, dreamy kawaii summer beach mood"

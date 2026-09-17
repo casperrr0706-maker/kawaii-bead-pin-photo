@@ -17,7 +17,7 @@ The processing logic is fixed:
 
 1. **Mosaic pass (approved parameters)** — run the reference image through `prepare_bead_pattern.py` to produce the mosaic (pixel plate) and bead-pattern plate, using the approved pre-processing spec (see "Fixed Bead-Grid Spec"): contain mode, light background, 22–28 grid, 10–12 colors.
 2. **Mosaic validation** — inspect the generated pixel plate / bead pattern and judge ONLY whether the subject shape is recognizable at mosaic resolution (silhouette + major color blocks). This is the single and final validation point for the subject.
-3. **If inaccurate** — adjust parameters (subject crop, more `--colors`, and only if the fixed grid loses the subject beyond repair, a grid size within the documented range) and rerun the mosaic pass; validate again. Loop here until the mosaic is accurate.
+3. **If inaccurate** — adjust only by cropping the subject to enlarge it (or rerunning contain), then rerun at the same locked grid/colors. Do NOT raise the grid or color count beyond the spec (22–28 / 10–12). If the mosaic still reads abstract, accept it and proceed.
 4. **Bead generation** — once the mosaic passes validation, generate the final photo from the mosaic. From this point the original photo is NO LONGER used for validation; the mosaic is the only source of truth for subject shape.
 
 Do not re-validate against the original photo during or after bead generation, and do not keep regenerating because a read-back description differs in minor ways. When the overall kawaii mood, hardware structure, and subject readability are achieved, deliver.
@@ -29,6 +29,7 @@ Do not re-validate against the original photo during or after bead generation, a
   - Grid **22×22–28×28**: simple subjects use 22, detailed subjects use 28 (the dolphin uses 28).
   - Colors **10–12** (Median Cut / palette quantization) — merges gradients into clean bead color blocks while keeping big color blocks.
   - A 28×28 grid naturally preserves the dolphin's big silhouette: curved body, dorsal fin, tail, belly white area; the dark eye survives as a high-contrast small block.
+- **Grid and color count are HARD-LOCKED** (user-confirmed): grid 22–28 (simple 22, detailed 28), colors 10–12. NEVER raise the grid or colors to chase detail recovery. If the subject still reads abstract at the locked settings, accept it — abstract is fine; the mosaic is still the structural anchor. Do not iterate the grid upward.
 - The pattern plate (`pixel_plate.png` / `bead_pattern.png`) is the ONLY structural anchor for generation. Never let the image model re-interpret the original photo's structure; otherwise the bead grid deforms.
 
 ## Mosaic-First Rule
@@ -48,7 +49,7 @@ Do not re-validate against the original photo during or after bead generation, a
 Read [references/style-guide.md](references/style-guide.md) before producing or revising a final image.
 
 - **Subject fidelity to mosaic**: the bead panel reproduces the mosaic — same simplified color blocks, same silhouette — as a **flat** bead grid where the pattern appears only through bead colors. No 3D relief, no raised subject on the beads. A mosaic-level border/frame color from the photo background (e.g. cyan/blue for sea or sky) may frame the panel.
-- **Bead texture**: glossy translucent bead tubes or rounded-square short beads with milky depth, subtle gradients, small top highlight, soft bottom shadow. Aligned rows/columns with slight natural sag.
+- **Bead texture — RHINESTONE-STUDDED MOSAIC (final output standard, user-approved)**: every bead in the panel is rendered as a tiny sparkling rhinestone / crystal stud — a flat-studded mosaic where the whole panel glitters like a diamond-studded surface. Each bead has a bright mirror highlight and sparkling facet-like glints; colors are saturated and luminous. This is the FIXED final texture for every output. Reference: `references/shiny-sample.png` (user-approved sparkling dolphin) and `references/approved-sample.png`. The panel stays completely flat; shine is bead-surface glitter, never 3D relief. Aligned rows/columns with slight natural sag.
 - **Hardware**: a silver metal safety pin spans the top. **Per-column hooks (mandatory)**: EVERY column of the bead panel has its own small metal jump ring or hook hooked onto the pin — one independent ring per column, a full row of rings, small gaps between them. Never two-corner attachments, never a shared chain.
 - **Pin decoration (no bead strings on the pin)**: the pin itself carries NO string of beads. It may carry one small themed ornament whose subject is drawn from the main subject — e.g. for a horse subject, a tiny plastic horse bead or horse-shaped charm on the pin bar; for a dolphin, a small dolphin/drop. The ornament uses subject colors.
 - **Charms and background (free variation)**: charms, pin decoration, and background may vary creatively around the subject as long as the overall mood matches — dreamy kawaii summer / beach vibe. They are not locked to any fixed set of elements. Preferred directions: one larger themed charm near the right end of the pin, small accents (stars, drops, pearls, bows), one filigree or bead tassel; soft-focus tropical beach background (blue sky, sand, flowers, palm leaves, bokeh, optional cute toy silhouette). All accent colors drawn from the subject palette.
@@ -59,7 +60,7 @@ Read [references/style-guide.md](references/style-guide.md) before producing or 
 Before delivering, check that:
 
 - The bead panel echoes the mosaic (color blocks + silhouette) as a flat color-only grid, without invented fine details or letters/numbers, and without any 3D relief / raised / volumetric subject on the beads.
-- Beads form aligned rows/columns; glossy bead-tube texture with gradients.
+- Beads form aligned rows/columns; **rhinestone-studded mosaic texture** — every bead is a sparkling crystal stud with bright mirror highlights (see `references/shiny-sample.png`).
 - Every column has its own visible hook/ring on the pin (scan top row; regenerate only if the whole structure is missing).
 - The pin has NO bead string on it; only one small themed ornament in subject colors.
 - Charm colors come from the subject palette; decorations support the subject.
@@ -73,7 +74,7 @@ Use the structure below as a starting point, adapt to the subject, and keep the 
 ```text
 Create a square kawaii product photo of a handmade bead mosaic charm hanging from a shiny silver safety pin.
 
-The bead panel is a COMPLETELY FLAT regular grid of glossy translucent bead tubes that faithfully reproduces the provided mosaic/pixel plate: same simplified color blocks, same silhouette, nothing more. The pattern appears ONLY through the color of each bead, like a pixel-art mosaic; every bead is on one plane. NO 3D relief, no raised figure, no volumetric character or pet built on top of the beads. Do NOT draw eyes, flowers, or any fine detail on the beads; no letters or numbers anywhere. A mosaic-level border color from the photo background (e.g. cyan/blue) may frame the panel. Beads show milky glossy depth with subtle color gradients, tiny top highlights, soft bottom shadows, aligned rows and columns with slight natural sag.
+The bead panel is a COMPLETELY FLAT regular grid of RHINESTONE-STUDDED beads that faithfully reproduces the provided mosaic/pixel plate: same simplified color blocks, same silhouette, nothing more. The pattern appears ONLY through the color of each bead, like a pixel-art mosaic; every bead is on one plane. NO 3D relief, no raised figure, no volumetric character or pet built on top of the beads. Do NOT draw eyes, flowers, or any fine detail on the beads; no letters or numbers anywhere. A mosaic-level border color from the photo background (e.g. cyan/blue) may frame the panel. Every bead is a tiny sparkling rhinestone/crystal stud with a bright mirror highlight and facet-like glints, like a diamond-studded mosaic catching light; aligned rows and columns with slight natural sag.
 
 Hardware (strict): EVERY column of the bead panel hangs on its own small metal jump ring or hook hooked onto the safety pin — one independent ring per column, a full visible row of rings along the pin with small gaps. Never two-corner hanging, never a shared chain. The pin itself carries NO string of beads; it carries only one small themed ornament based on the subject (e.g. a tiny [subject] bead or charm) in subject colors.
 
