@@ -17,6 +17,10 @@ The processing logic is fixed. Follow exactly this order, one pass each:
 
 1. **Pre-clean (only if needed)** — (a) if the photo contains readable text / numbers / watermarks / signatures (e.g. "25", "イルカ", "g.b."), remove them first with inpainting/cleanup so the removed area blends naturally into the surrounding background; (b) if a noisy background (e.g. stripes) distracts from the subject, crop the subject larger. Both are optional and skipped when not needed.
 2. **Mosaic pass (approved parameters)** — run the reference image through `prepare_bead_pattern.py` to produce the mosaic (pixel plate) and bead-pattern plate, using the approved pre-processing spec (see "Fixed Bead-Grid Spec"): contain mode, light background, 22–28 grid, 10–12 colors. Run it ONCE with the fixed parameters; do not tune parameters for detail.
+
+**Exact command (mandatory)** — always call the script like this:
+`python3 scripts/prepare_bead_pattern.py <input.png> --out-dir <out> --grid 28 --colors 12 --mode contain --background <bg-color-sampled-from-photo>`
+`--mode` MUST be `contain`. `cover`/`center` is FORBIDDEN: it center-crops the subject and destroys the silhouette and edges. If the photo is not square, contain pads with the background color — never crop. If a run is found to have used cover/center, re-run with contain.
 3. **Mosaic validation (single, final)** — inspect the generated bead pattern and judge ONLY whether the subject silhouette and major color blocks are readable at mosaic resolution. This is the one and only subject check. **If it reads abstract, accept it and proceed** — abstract is fine, the mosaic is still the structural anchor. Only if the subject is unrecognizably wrong may you crop the subject larger and rerun once at the SAME locked grid/colors (never raise them).
 4. **Bead generation (one shot)** — generate the final photo from the mosaic. The mosaic is the ONLY source of truth for subject shape; the original photo is no longer used. Generate once. Only regenerate when the subject was misread as a different subject (e.g. cake → dog/character), the bead shape/size/count drifted (e.g. square studs became round beads), the panel base color was lost (e.g. whole panel turned white), or the hardware structure (pin / per-column rings) is wholly missing.
 
@@ -41,7 +45,7 @@ Never show more than one label per step, never re-announce a step that already r
 ## Fixed Bead-Grid Spec (mandatory)
 
 - Mosaic pre-processing follows the approved parameters (user-confirmed):
-  - **contain** fit mode by default — keep the WHOLE image (subject AND its background), never crop the subject away from its background; fill empty area with a background color sampled from the photo's own background (fallback `#DDF8FF`).
+  - **contain** fit mode is the ONLY allowed mode — keep the WHOLE image (subject AND its background), never crop the subject away from its background; fill empty area with a background color sampled from the photo's own background (fallback `#DDF8FF`). NEVER use `cover`/`center` mode: it center-crops the subject and destroys the silhouette and edges (this exact failure happened in a fresh install of this skill).
   - **Full-image color fidelity (user-confirmed)**: the mosaic must faithfully reproduce the ENTIRE picture's colors and shape — the subject AND its background colors (e.g. pink fabric background stays pink in the panel). The panel later keeps this background color as its base/frame. NEVER strip the background to "extract the subject only", and NEVER let the final panel turn a single flat color (e.g. all-white) when the mosaic has a colored base.
   - Grid **22×22–28×28**: simple subjects use 22, detailed subjects use 28 (the dolphin uses 28).
   - Colors **10–12** (Median Cut / palette quantization) — merges gradients into clean bead color blocks while keeping big color blocks.
@@ -86,7 +90,7 @@ These branches add no value to the final output and must not be taken:
 
 Before delivering, check that:
 
-- The bead panel echoes the mosaic (color blocks + silhouette, INCLUDING the photo's background color as base/frame) as a flat color-only grid, without invented fine details or letters/numbers, and without any 3D relief / raised / volumetric subject on the beads.
+- The bead panel echoes the mosaic (color blocks + silhouette, INCLUDING the photo's background color as base/frame) as a flat color-only grid, without invented fine details or letters/numbers, and without any 3D relief / raised / volumetric subject on the beads. **The subject's recognizable color-block features must be readable in the panel** (e.g. kitty's eyes/nose/whiskers as color blocks, cake's layers/berries) — a blank/abstract colored plate with no subject features fails the gate and must be regenerated once with the subject description in the prompt.
 - Beads form aligned rows/columns; **SQUARE rhinestone-studded texture with STRONG SPARKLE** — every bead is a square sparkling crystal stud (NOT round/oval/hexagonal) with bright mirror highlights and star glints, matching the reference grid size/count/placement (see `references/shiny-sample.png`).
 - The panel base/frame color from the mosaic is PRESERVED (not washed out to all-white).
 - Every column has its own visible hook/ring on the pin (scan top row; regenerate only if the whole structure is missing).
@@ -97,10 +101,14 @@ Before delivering, check that:
 
 ## Prompt Shape
 
-Use the structure below as a starting point, adapt to the subject, and keep the per-column hook requirement, square-stud shape, panel-base-color retention, and strong-sparkle rule explicit:
+Use the structure below as a starting point, adapt to the subject, and keep the per-column hook requirement, square-stud shape, panel-base-color retention, strong-sparkle rule explicit, AND the mosaic-subject description:
+
+**Mosaic-subject description (mandatory, user-confirmed)**: BEFORE writing the prompt, describe the mosaic's subject in ONE sentence from its color blocks — e.g. for the kitty: "white round kitty face with two upright ears, one red one pink strawberry on top, two black dot eyes, yellow round nose, three grey whiskers each side, pink background". Put this sentence right after "strictly follow the first image's color-block structure" and instruct the model to reproduce THAT subject's color blocks exactly. Without this description the model tends to output only a blank/abstract colored base and drops the subject's features (this exact failure happened in a fresh install — the panel lost the kitty's eyes/nose/whiskers and showed only a pink plate).
 
 ```text
 Create a square kawaii product photo of a handmade bead mosaic charm hanging from a shiny silver safety pin. Match the SQUARE rhinestone-studded texture, bead grid size/count/placement, and strong sparkle of the provided style reference (NOT plain matte beads, NOT round beads, NOT oval/hexagonal, NOT a different bead density).
+
+[DESCRIBE THE MOSAIC SUBJECT IN ONE SENTENCE FROM ITS COLOR BLOCKS, e.g.: The first image shows a white round kitty face with two upright ears, one red and one pink strawberry on top, two black dot eyes, a yellow round nose, three grey whiskers on each side, on a pink background — strictly reproduce this subject's color-block structure exactly from the mosaic plate.]
 
 IMPORTANT FLAT RULE — read first: This is a FLAT bead mosaic, like pixel art. NOTHING protrudes. The subject does NOT exist as a real toy or object; it exists ONLY as colored beads on one flat surface. No plush fabric, no cloth, no felt, no stuffing, no doll, no toy standing on the panel, no shadows under the subject, no depth, no relief, no raised pattern.
 

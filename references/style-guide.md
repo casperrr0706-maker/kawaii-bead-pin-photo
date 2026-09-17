@@ -4,7 +4,7 @@ This reference defines the target look for the bead safety-pin photo workflow. T
 
 ## Fixed Bead-Grid Spec (approved pre-processing parameters)
 
-- Mosaic pre-processing: **contain** mode (keep the WHOLE image — subject AND its background; never crop the subject away), background fill sampled from the photo's own background color (fallback `#DDF8FF`), grid **22–28** (simple → 22, detailed → 28; dolphin = 28), colors **10–12** (Median Cut quantization).
+- Mosaic pre-processing: **contain** mode is the ONLY allowed mode (keep the WHOLE image — subject AND its background; never crop the subject away; `cover`/`center` is FORBIDDEN — it center-crops the subject and destroys the silhouette/edges, this failed in a fresh install), background fill sampled from the photo's own background color (fallback `#DDF8FF`), grid **22–28** (simple → 22, detailed → 28; dolphin = 28), colors **10–12** (Median Cut quantization).
 - **Full-image color fidelity (user-confirmed)**: the mosaic reproduces the ENTIRE picture's colors — the subject and its background colors stay (pink fabric background → pink base in the panel). The panel keeps that background color as its base/frame. Never let the final panel wash out to a single flat color (e.g. all-white) when the mosaic has a colored base.
 - 28×28 keeps the dolphin's big silhouette (curved body, dorsal fin, tail, belly white) and the high-contrast dark eye; 12 colors merge blue-white gradients into clean bead blocks.
 - **Grid 22–28 / colors 10–12 are HARD-LOCKED** (user-confirmed). Never raise grid or colors to chase detail; abstract mosaics are accepted and used as the anchor as-is.
@@ -80,6 +80,7 @@ The result should feel like a collectible handmade accessory photographed in a d
 ## Suggested Image Prompt Additions
 
 - "macro product photography, handmade kawaii craft accessory"
+- "[one sentence describing the mosaic subject from its color blocks — e.g. white round kitty face, two ears, strawberries on top, black dot eyes, yellow nose, whiskers, pink background — strictly reproduce this subject's color blocks from the mosaic plate, no added details]"
 - "faithfully reproduce the mosaic pixel plate — full image colors including its background, no added details"
 - "FLAT mosaic like pixel art, nothing protrudes, subject exists only as colored beads on one flat surface"
 - "SQUARE rhinestone-studded mosaic: every bead a square-cut crystal stud (NOT round/oval/hexagonal), bright mirror highlight AND facet-like star glints, diamond-studded glitter look, brighter and more luminous, bead grid size/count/placement matching the style reference"
