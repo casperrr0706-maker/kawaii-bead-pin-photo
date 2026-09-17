@@ -12,7 +12,7 @@ This reference defines the target look for the bead safety-pin photo workflow. T
 ## Pipeline
 
 1. **Mosaic pass (approved parameters)** — run `prepare_bead_pattern.py` on the reference photo: contain mode, light background, 22–28 grid, 10–12 colors.
-2. **Mosaic validation (single validation point)** — check ONLY whether the subject shape is recognizable at mosaic resolution. Loop on colors / subject crop (and only documented grid deviations) until accurate.
+2. **Mosaic validation (single validation point)** — check ONLY whether the subject shape is recognizable at mosaic resolution. Abstract is accepted and used as-is; at most ONE re-run with a larger subject crop at the SAME locked grid/colors (never raise grid or colors).
 3. **Bead generation** — after validation passes, the mosaic is the only reference for subject shape; the original photo is not used for further validation.
 
 ## Core Visual Formula
@@ -41,7 +41,7 @@ The result should feel like a collectible handmade accessory photographed in a p
 ## Bead Panel
 
 - Hanging grid follows the approved pre-processing: 22–28 columns square grid (dolphin = 28), 10–12 colors, contain fit with light background fill.
-- **Beads are RHINESTONE-STUDDED (final output standard, user-approved)**: every bead is a tiny sparkling rhinestone/crystal stud; the whole panel glitters like a diamond-studded mosaic. Each bead: bright mirror highlight, facet-like sparkle glints, saturated luminous color. Reference: `shiny-sample.png` (user-approved sparkling dolphin) and `approved-sample.png`.
+- **Beads are RHINESTONE-STUDDED, SQUARE CUT (final output standard, user-approved)**: every bead is a SQUARE rhinestone/crystal stud; the whole panel glitters like a diamond-studded mosaic. Each bead: bright mirror highlight, facet-like sparkle glints, saturated luminous color. **Bead size / count / grid placement must match `shiny-sample.png` exactly** (same rows & columns, same bead proportions, same panel position — the anchor now is the user-approved abstract color-block sample with square studs and NO subject, so it also locks the grid spec without contaminating the new subject). Reference: `shiny-sample.png` and `approved-sample.png`.
 - Shine is bead-surface glitter on a completely flat panel; never 3D relief, never raised subject.
 - Rows and columns regular with slight natural sag.
 - Optional framing border color derived from the photo background (sea/sky → cyan/blue) as a mosaic-level block.
@@ -56,7 +56,7 @@ The result should feel like a collectible handmade accessory photographed in a p
 ## Charms and Decorations (free variation)
 
 - Charms, pin ornament, and background may vary creatively around the subject; only the mood must match (dreamy kawaii summer/beach).
-- Suggested directions: one larger themed charm near the right end of the pin; small accents (stars, water drops, pearl drops, bows, hearts, keys, glass beads, transparent petals); one metal filigree or bead-string tassel beside the panel.
+- Suggested directions: one larger themed charm **derived from the subject** near the right end of the pin; small accents (stars, water drops, pearl drops, bows, hearts, keys, glass beads, transparent petals); one metal filigree or bead-string tassel beside the panel. The right-end charm and the pin ornament both derive from the subject; small accents are generic.
 - All accent colors extracted from the subject palette.
 - Charms hang from the pin or its right end; they never replace or mimic subject details on the panel.
 
@@ -81,7 +81,7 @@ The result should feel like a collectible handmade accessory photographed in a p
 
 - "macro product photography, handmade kawaii craft accessory"
 - "faithfully reproduce the mosaic pixel plate, no added details"
-- "shiny rhinestone-studded mosaic, every bead a sparkling crystal stud, bright mirror highlight per bead, facet-like glints, diamond-studded glitter look"
+- "shiny rhinestone-studded mosaic, SQUARE-cut crystal studs, bright mirror highlight per bead, facet-like glints, diamond-studded glitter look, bead grid size/count/placement matching the style reference"
 - "silver safety pin hardware, one independent jump ring per column"
 - "no bead strings on the pin, only one small themed ornament in subject colors"
 - "freely vary charms and background around the subject, dreamy kawaii summer beach mood"
