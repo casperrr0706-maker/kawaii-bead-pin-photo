@@ -1,6 +1,6 @@
 # Kawaii Bead Pin Photo Style Guide
 
-This reference defines the target look for the bead safety-pin photo workflow. The approved mood sample lives in this folder (`approved-sample.png`) — a beach-side summer scene with a bead mosaic panel, small flower on the pin, and shell/flower/star charms.
+This reference defines the target look for the bead safety-pin photo workflow. The approved mood samples live in this folder: `shiny-sample.png` (user-approved **white pearl bead-curtain** sample — white pearl beads as separate vertical bead strings, one independent hook per column, gaps between columns showing the background, dreamy beach composition) and `approved-sample.png` (beach-side summer scene with a bead mosaic panel, small flower on the pin, and shell/flower/star charms).
 
 ## Fixed Bead-Grid Spec (approved pre-processing parameters)
 
@@ -43,7 +43,7 @@ The result should feel like a collectible handmade accessory photographed in a p
 ## Bead Panel
 
 - Hanging grid follows the approved pre-processing: 22–28 columns square grid (dolphin = 28), 10–12 colors, contain fit with background fill sampled from the photo's own background; **the panel reproduces the FULL image colors — subject plus its background color as base/frame**.
-- **Beads are RHINESTONE-STUDDED, SQUARE CUT (final output standard, user-approved)**: every bead is a SQUARE rhinestone/crystal stud; the whole panel glitters like a diamond-studded mosaic. Each bead: bright mirror highlight, facet-like sparkle glints, saturated luminous color. **Bead size / count / grid placement must match `shiny-sample.png` exactly** (same rows & columns, same bead proportions, same panel position — the anchor now is the user-approved abstract color-block sample with square studs and NO subject, so it also locks the grid spec without contaminating the new subject). Reference: `shiny-sample.png` and `approved-sample.png`.
+- **Beads are WHITE PEARL BEAD CURTAIN, SEPARATE COLUMNS (final output standard, user-approved)**: the panel is a curtain of white pearl/crystal beads hanging as **separate vertical bead strings — one column one string, NOT a solid connected panel; gaps between columns show the background**. Every column hangs from its own small metal hook on the pin. Each bead: bright mirror highlight, sparkling glints; colors are applied from the mosaic (beads start white). **Bead size / column count / beads per column / placement MUST match `shiny-sample.png` exactly** — the anchor now is the user-approved white pearl bead-curtain sample, so it locks texture, column structure and grid spec without any color contamination. Reference: `shiny-sample.png` and `approved-sample.png`.
 - Shine is bead-surface glitter on a completely flat panel; never 3D relief, never raised subject.
 - Rows and columns regular with slight natural sag.
 - Optional framing border color derived from the photo background (sea/sky → cyan/blue) as a mosaic-level block.
@@ -84,7 +84,7 @@ The result should feel like a collectible handmade accessory photographed in a p
 - "faithfully reproduce the mosaic pixel plate — full image colors including its background, no added details"
 - "FLAT mosaic like pixel art, nothing protrudes, subject exists only as colored beads on one flat surface"
 - "no plush, no cloth, no felt, no stuffing, no doll, no toy or cake model on the panel, no shadows under the subject"
-- "shiny rhinestone-studded mosaic, SQUARE-cut crystal studs, bright mirror highlight per bead, facet-like glints, diamond-studded glitter look, bead grid size/count/placement matching the style reference"
+- "white pearl bead-curtain mosaic: every bead a white pearl/crystal bead with bright mirror highlight and sparkle; separate vertical bead strings, one column one string, gaps between columns showing the background, column count / bead size / placement matching the style reference"
 - "silver safety pin hardware, one independent jump ring per column"
 - "no bead strings on the pin, only one small themed ornament in subject colors"
 - "freely vary charms and background around the subject; background scene follows the subject's natural context (sea for dolphin, forest for flowers, dessert shop for cake), dreamy kawaii mood"
