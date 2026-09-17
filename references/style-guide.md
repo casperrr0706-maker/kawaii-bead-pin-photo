@@ -55,16 +55,15 @@ The result should feel like a collectible handmade accessory photographed in a p
 
 ## Charms and Decorations (free variation)
 
-- Charms, pin ornament, and background may vary creatively around the subject; only the mood must match (dreamy kawaii summer/beach).
+- Charms, pin ornament, and background may vary around the subject; the mood must stay dreamy kawaii, and the background scene follows the subject's natural context.
 - Suggested directions: one larger themed charm **derived from the subject** near the right end of the pin; small accents (stars, water drops, pearl drops, bows, hearts, keys, glass beads, transparent petals); one metal filigree or bead-string tassel beside the panel. The right-end charm and the pin ornament both derive from the subject; small accents are generic.
 - All accent colors extracted from the subject palette.
 - Charms hang from the pin or its right end; they never replace or mimic subject details on the panel.
 
 ## Background
 
-- Dreamy kawaii summer / tropical beach, decorative but secondary: bright blue sky, warm sand, flowers, palm leaves, blurred bokeh, sparkles, diffuse sunlight.
-- Optional cute toy silhouettes (e.g. Hello Kitty, teddy bear) softly blurred in the background.
-- Soft focus, shallow depth of field, pastel gradients.
+- **Scene follows the subject's natural context** (user-confirmed): dolphin / sea creature → ocean / beach in blue tones; flowers / plants → forest / garden in green tones; cake / dessert → pastel dessert-shop or summer-cafe setting; horse → meadow / pasture; pet → cozy home garden. Scene colors harmonize with the subject palette.
+- **Composition framework is FIXED for every output**: dreamy kawaii style, soft focus, bright and cute, gentle bokeh sparkles, shallow depth of field, square centered framing, optional blurred cute toy silhouette at bottom right.
 - Avoid dark palettes, gritty texture, realistic clutter, readable text, brand marks.
 
 ## Composition
@@ -84,7 +83,7 @@ The result should feel like a collectible handmade accessory photographed in a p
 - "shiny rhinestone-studded mosaic, SQUARE-cut crystal studs, bright mirror highlight per bead, facet-like glints, diamond-studded glitter look, bead grid size/count/placement matching the style reference"
 - "silver safety pin hardware, one independent jump ring per column"
 - "no bead strings on the pin, only one small themed ornament in subject colors"
-- "freely vary charms and background around the subject, dreamy kawaii summer beach mood"
+- "freely vary charms and background around the subject; background scene follows the subject's natural context (sea for dolphin, forest for flowers, dessert shop for cake), dreamy kawaii mood"
 - "charm colors extracted from the subject palette"
 
 Negative constraints:
