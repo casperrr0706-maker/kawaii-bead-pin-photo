@@ -20,6 +20,11 @@ The processing logic is fixed. Follow exactly this order, one pass each:
 3. **Mosaic validation (single, final)** — inspect the generated bead pattern and judge ONLY whether the subject silhouette and major color blocks are readable at mosaic resolution. This is the one and only subject check. **If it reads abstract, accept it and proceed** — abstract is fine, the mosaic is still the structural anchor. Only if the subject is unrecognizably wrong may you crop the subject larger and rerun once at the SAME locked grid/colors (never raise them).
 4. **Bead generation (one shot)** — generate the final photo from the mosaic. The mosaic is the ONLY source of truth for subject shape; the original photo is no longer used. Generate once. Only regenerate when the subject was misread as a different subject (e.g. cake → dog/character) or the hardware structure (pin / per-column rings) is wholly missing.
 
+**Generation inputs (mandatory)**: every image-generation call MUST pass BOTH reference images to the image tool together:
+1. the mosaic plate (`bead_pattern.png`) — structure anchor (subject shape);
+2. `references/shiny-sample.png` — TEXTURE anchor (the user-approved sparkling rhinestone-mosaic look).
+Never generate from the mosaic alone, never from text alone, never swap the texture reference for another image. The texture anchor is what produces the studded-glitter look; without it the model defaults to plain matte beads (this exact failure happened once in a fresh install).
+
 Do not re-validate against the original photo, do not re-roll the mosaic for detail, and do not keep regenerating because a read-back description differs in minor ways. When the kawaii mood, hardware structure, and subject readability are achieved, deliver.
 
 ## Progress Display (user-facing steps)
@@ -93,7 +98,7 @@ Before delivering, check that:
 Use the structure below as a starting point, adapt to the subject, and keep the per-column hook requirement and the no-detail rule explicit:
 
 ```text
-Create a square kawaii product photo of a handmade bead mosaic charm hanging from a shiny silver safety pin.
+Create a square kawaii product photo of a handmade bead mosaic charm hanging from a shiny silver safety pin. Match the sparkling rhinestone-studded bead texture of the provided shiny texture reference (NOT plain matte beads).
 
 The bead panel is a COMPLETELY FLAT regular grid of RHINESTONE-STUDDED beads that faithfully reproduces the provided mosaic/pixel plate: same simplified color blocks, same silhouette, nothing more. The pattern appears ONLY through the color of each bead, like a pixel-art mosaic; every bead is on one plane. NO 3D relief, no raised figure, no volumetric character or pet built on top of the beads. Do NOT draw eyes, flowers, or any fine detail on the beads; no letters or numbers anywhere. A mosaic-level border color from the photo background (e.g. cyan/blue) may frame the panel. Every bead is a tiny sparkling rhinestone/crystal stud with a bright mirror highlight and facet-like glints, like a diamond-studded mosaic catching light; aligned rows and columns with slight natural sag.
 
