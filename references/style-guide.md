@@ -1,30 +1,31 @@
 # Kawaii Bead Pin Photo Style Guide
 
-This reference defines the target look for the bead safety-pin photo workflow. The approved mood samples live in this folder: `shiny-sample.png` (user-approved **white pearl bead-curtain** sample — white pearl beads as separate vertical bead strings, one independent hook per column, gaps between columns showing the background, dreamy beach composition) and `approved-sample.png` (beach-side summer scene with a bead mosaic panel, small flower on the pin, and shell/flower/star charms).
+This reference defines the target look for the bead safety-pin photo workflow. The approved mood samples live in this folder: `shiny-sample.png` (user-approved **abstract color-block SQUARE rhinestone-studded sample** — square-cut crystal studs in a regular square grid, strong mirror highlights and star glints, fixed bead size/count/placement, full dreamy composition, NO concrete subject) and `approved-sample.png` (beach-side summer scene with a bead mosaic panel, small flower on the pin, and shell/flower/star charms).
 
 ## Fixed Bead-Grid Spec (approved pre-processing parameters)
 
 - Mosaic pre-processing: **contain** mode (keep the WHOLE image — subject AND its background; never crop the subject away), background fill sampled from the photo's own background color (fallback `#DDF8FF`), grid **22–28** (simple → 22, detailed → 28; dolphin = 28), colors **10–12** (Median Cut quantization).
-- **Full-image color fidelity (user-confirmed)**: the mosaic reproduces the ENTIRE picture's colors — the subject and its background colors stay (pink fabric background → pink base in the panel). The panel keeps that background color as its base/frame.
+- **Full-image color fidelity (user-confirmed)**: the mosaic reproduces the ENTIRE picture's colors — the subject and its background colors stay (pink fabric background → pink base in the panel). The panel keeps that background color as its base/frame. Never let the final panel wash out to a single flat color (e.g. all-white) when the mosaic has a colored base.
 - 28×28 keeps the dolphin's big silhouette (curved body, dorsal fin, tail, belly white) and the high-contrast dark eye; 12 colors merge blue-white gradients into clean bead blocks.
 - **Grid 22–28 / colors 10–12 are HARD-LOCKED** (user-confirmed). Never raise grid or colors to chase detail; abstract mosaics are accepted and used as the anchor as-is.
 - The pattern plate is the ONLY structural anchor; the image model must not re-interpret the original photo's structure.
 
 ## Pipeline
 
-1. **Mosaic pass (approved parameters)** — run `prepare_bead_pattern.py` on the reference photo: contain mode, light background, 22–28 grid, 10–12 colors.
-2. **Mosaic validation (single validation point)** — check ONLY whether the subject shape is recognizable at mosaic resolution. Abstract is accepted and used as-is; at most ONE re-run with a larger subject crop at the SAME locked grid/colors (never raise grid or colors).
-3. **Bead generation** — after validation passes, the mosaic is the only reference for subject shape; the original photo is not used for further validation.
+1. **Pre-clean (only if needed)** — readable text / numbers / watermarks / signatures removed by inpainting (area blends into surrounding background); noisy backgrounds (e.g. stripes) get a larger subject crop.
+2. **Mosaic pass (approved parameters)** — run `prepare_bead_pattern.py` on the reference photo: contain mode, light background, 22–28 grid, 10–12 colors.
+3. **Mosaic validation (single validation point)** — check ONLY whether the subject shape is recognizable at mosaic resolution. Abstract is accepted and used as-is; at most ONE re-run with a larger subject crop at the SAME locked grid/colors (never raise grid or colors).
+4. **Bead generation (one shot)** — after validation passes, the mosaic is the only reference for subject shape; the original photo is not used for further validation. Generation passes BOTH references: `bead_pattern.png` (structure) + `shiny-sample.png` (texture + grid).
 
 ## Core Visual Formula
 
 Three layers:
 
-1. A reference subject quantized into a mosaic, then translated into bead art — the mosaic is the only detail source.
-2. A physical bead panel hanging from a real-looking metal safety pin, one independent hook/ring per column.
-3. A dreamy kawaii summer/beach product-photo setting with subject-colored charms.
+1. A reference subject quantized into a mosaic (subject AND background colors), then translated into bead art — the mosaic is the only detail source.
+2. A flat square-cut rhinestone-studded panel hanging from a real-looking metal safety pin, one independent hook/ring per column.
+3. A dreamy kawaii product-photo setting whose BACKGROUND SCENE follows the subject's natural context, with subject-colored charms.
 
-The result should feel like a collectible handmade accessory photographed in a playful beach studio set.
+The result should feel like a collectible handmade accessory photographed in a dreamy studio set themed to the subject.
 
 ## Mosaic-First Principle (highest priority)
 
@@ -36,35 +37,33 @@ The result should feel like a collectible handmade accessory photographed in a p
 
 - The panel is a **completely flat** regular bead grid; the subject AND its background colors appear ONLY through bead colors, like pixel art. All beads on one plane.
 - NEVER sculpt a 3D/raised subject on top of the beads (no volumetric character/pet/doll, no relief, no embossed figure, no depth illusion inside the panel).
-- **Anti-3D enforcement (user-confirmed)**: the model re-inflates real-world entities (plush, cakes, toys) into volume despite the flat mosaic — so LEAD every prompt with a strong flat declaration before the subject, and ban volumetric materials ("no plush, no cloth, no felt, no stuffing, no toy/doll/cake-model on the panel, no shadows under the subject"). If a volumetric toy appears on/above the panel, FAIL and regenerate once with the strong declaration.
-- Reference files: `flat-style-A.png` ~ `flat-style-D.png` show the approved flat look.
-- Prompt additions: "flat mosaic, colors only, all beads on one plane, no 3D relief, no raised pattern, no volumetric figure, no plush, no doll, no cake model on the panel".
+- Prompt additions: "flat mosaic, colors only, all beads on one plane, no 3D relief, no raised pattern, no volumetric figure".
 
 ## Bead Panel
 
 - Hanging grid follows the approved pre-processing: 22–28 columns square grid (dolphin = 28), 10–12 colors, contain fit with background fill sampled from the photo's own background; **the panel reproduces the FULL image colors — subject plus its background color as base/frame**.
-- **Beads are WHITE PEARL BEAD CURTAIN, SEPARATE COLUMNS (final output standard, user-approved)**: the panel is a curtain of white pearl/crystal beads hanging as **separate vertical bead strings — one column one string, NOT a solid connected panel; gaps between columns show the background**. Every column hangs from its own small metal hook on the pin. Each bead: bright mirror highlight, sparkling glints; colors are applied from the mosaic (beads start white). **Bead size / column count / beads per column / placement MUST match `shiny-sample.png` exactly** — the anchor now is the user-approved white pearl bead-curtain sample, so it locks texture, column structure and grid spec without any color contamination. Reference: `shiny-sample.png` and `approved-sample.png`.
+- **Beads are SQUARE CUT RHINESTONE-STUDDED, STRONG SPARKLE (final output standard, user-approved)**: every bead is a **square** rhinestone/crystal stud — square-cut flat crystal tiles in a regular square grid, like square mosaic tiles. NEVER round, oval, or hexagonal beads. Each bead: bright mirror highlight AND facet-like star glints, saturated luminous color, whole panel glitters like a diamond-studded mosaic, brighter and more luminous. **Bead size / count / grid placement MUST match `shiny-sample.png` exactly** (same rows & columns, same bead proportions, same panel position) — the anchor is the user-approved abstract color-block square-stud sample with NO subject, so it locks texture, shape, and grid spec without contaminating the new subject. Reference: `shiny-sample.png` and `approved-sample.png`.
 - Shine is bead-surface glitter on a completely flat panel; never 3D relief, never raised subject.
 - Rows and columns regular with slight natural sag.
-- Optional framing border color derived from the photo background (sea/sky → cyan/blue) as a mosaic-level block.
+- The photo's background color stays as the panel base/frame (pink fabric → pink base; sky → blue frame).
 
 ## Hardware
 
 - Silver or chrome safety pin across the top.
 - **Per-column hooks (strict)**: EVERY column of top-row beads has its own small metal jump ring or hook attached directly to the pin — one ring per column, a full row of rings with small gaps. Never two-corner hanging, never a shared chain.
-- **No bead strings on the pin**: the pin bar carries NO string of beads. It may carry ONE small themed ornament drawn from the subject — e.g. a tiny horse bead/charm for a horse subject, a small drop for a dolphin — in subject colors.
-- Tiny loops or bead-string endings along the panel's lower edge are fine.
+- **No bead strings on the pin**: the pin bar carries NO string of beads. It carries exactly ONE small themed ornament **extracted from the CURRENT subject** — e.g. a tiny horse bead/charm for a horse subject, a small drop for a dolphin, a mini cake bead for a cake, a small strawberry bead for a strawberry-kitty — in subject colors.
+- **Anti-contamination (user-confirmed)**: the pin ornament must NOT be a transparent round ball containing an animal, and must NOT carry over the reference sample's old subject (e.g. do not put the texture anchor's dolphin onto a non-dolphin output).
 
 ## Charms and Decorations (free variation)
 
-- Charms, pin ornament, and background may vary around the subject; the mood must stay dreamy kawaii, and the background scene follows the subject's natural context.
+- Charms and pin ornament vary around the subject; the mood stays dreamy kawaii, and the background scene follows the subject's natural context.
 - Suggested directions: one larger themed charm **derived from the subject** near the right end of the pin; small accents (stars, water drops, pearl drops, bows, hearts, keys, glass beads, transparent petals); one metal filigree or bead-string tassel beside the panel. The right-end charm and the pin ornament both derive from the subject; small accents are generic.
 - All accent colors extracted from the subject palette.
 - Charms hang from the pin or its right end; they never replace or mimic subject details on the panel.
 
 ## Background
 
-- **Scene follows the subject's natural context** (user-confirmed): dolphin / sea creature → ocean / beach in blue tones; flowers / plants → forest / garden in green tones; cake / dessert → pastel dessert-shop or summer-cafe setting; horse → meadow / pasture; pet → cozy home garden. Scene colors harmonize with the subject palette.
+- **Scene follows the subject's natural context** (user-confirmed): dolphin / sea creature → ocean / beach in blue tones; flowers / plants → forest / garden in green tones; cake / dessert → pastel dessert-shop or summer-cafe setting; strawberry / kitty → pink dreamy strawberry girlish scene; horse → meadow / pasture; pet → cozy home garden. Scene colors harmonize with the subject palette.
 - **Composition framework is FIXED for every output**: dreamy kawaii style, soft focus, bright and cute, gentle bokeh sparkles, shallow depth of field, square centered framing, optional blurred cute toy silhouette at bottom right.
 - Avoid dark palettes, gritty texture, realistic clutter, readable text, brand marks.
 
@@ -75,7 +74,7 @@ The result should feel like a collectible handmade accessory photographed in a p
 
 ## Judgment (avoid over-iteration)
 
-- The mood, hardware structure, and subject readability are the acceptance criteria, not pixel-perfect read-back descriptions.
+- The mood, hardware structure, subject readability, square bead shape, and preserved panel base color are the acceptance criteria, not pixel-perfect read-back descriptions.
 - Do not keep regenerating because a read-back description differs in minor ways; when the overall kawaii mood + structure + readability are achieved, deliver.
 
 ## Suggested Image Prompt Additions
@@ -83,16 +82,18 @@ The result should feel like a collectible handmade accessory photographed in a p
 - "macro product photography, handmade kawaii craft accessory"
 - "faithfully reproduce the mosaic pixel plate — full image colors including its background, no added details"
 - "FLAT mosaic like pixel art, nothing protrudes, subject exists only as colored beads on one flat surface"
-- "no plush, no cloth, no felt, no stuffing, no doll, no toy or cake model on the panel, no shadows under the subject"
-- "white pearl bead-curtain mosaic: every bead a white pearl/crystal bead with bright mirror highlight and sparkle; separate vertical bead strings, one column one string, gaps between columns showing the background, column count / bead size / placement matching the style reference"
+- "SQUARE rhinestone-studded mosaic: every bead a square-cut crystal stud (NOT round/oval/hexagonal), bright mirror highlight AND facet-like star glints, diamond-studded glitter look, brighter and more luminous, bead grid size/count/placement matching the style reference"
+- "panel base/frame color kept from the mosaic background, never washed out to all-white"
 - "silver safety pin hardware, one independent jump ring per column"
-- "no bead strings on the pin, only one small themed ornament in subject colors"
-- "freely vary charms and background around the subject; background scene follows the subject's natural context (sea for dolphin, forest for flowers, dessert shop for cake), dreamy kawaii mood"
+- "no bead strings on the pin, only one small themed ornament extracted from the CURRENT subject in subject colors; no transparent ball with an animal, no carried-over subject from the reference"
+- "background scene follows the subject's natural context (sea for dolphin, forest for flowers, dessert shop for cake, pink strawberry girlish scene for strawberry/kitty), dreamy kawaii mood"
 - "charm colors extracted from the subject palette"
 
 Negative constraints:
 
 - "no printed poster, no flat pixel art, no embroidery, no fabric panel"
 - "no beads forming eyes/flowers/details absent from the mosaic"
+- "no round/oval/hexagonal beads, panel washed out to all-white"
 - "no bead strings on the pin, no single-point or two-corner hanging, no shared-chain hanging, no missing per-column rings"
+- "no transparent ball with an animal on the pin, no carried-over subject from the reference"
 - "no watermark, no logo, no readable typography"
